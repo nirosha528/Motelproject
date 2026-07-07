@@ -1,0 +1,37 @@
+﻿@model MotelBooking.Models.Room
+
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+
+<div class="container mt-4">
+
+    <h2>Edit Room</h2>
+
+    <form asp-action="Edit" method="post" class="card p-3">
+
+        <input type="hidden" asp-for="RoomID" />
+
+        <input asp-for="RoomNumber" class="form-control mb-2" />
+        <input asp-for="RoomType" class="form-control mb-2" />
+
+        <input asp-for="PricePerHourly" class="form-control mb-2" />
+        <input asp-for="PricePerNight" class="form-control mb-2" />
+        <input asp-for="PricePerDay" class="form-control mb-2" />
+
+        <input asp-for="ImageUrl" class="form-control mb-2" />
+
+        <label>
+            <input asp-for="IsAvailable" /> Available
+        </label>
+
+        <button type="submit" class="btn btn-success mt-2">Update</button>
+
+    </form>
+
+</div>
