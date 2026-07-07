@@ -1,0 +1,30 @@
+﻿@model MotelBooking.Models.User
+
+<div class="container mt-5">
+
+    <h3>Customer Register</h3>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    <form asp-controller="Account" asp-action="Register" method="post">
+
+        <input asp-for="FullName" class="form-control mb-2" placeholder="Name" />
+
+        <input asp-for="Email" class="form-control mb-2" placeholder="Email" />
+
+        <input asp-for="Username" class="form-control mb-2" placeholder="Username" />
+
+        <input asp-for="Password" type="password" class="form-control mb-2" placeholder="Password" />
+
+        <button type="submit" class="btn btn-success w-100">
+            Register
+        </button>
+
+    </form>
+
+</div>

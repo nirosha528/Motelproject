@@ -1,37 +1,75 @@
-﻿@model MotelBooking.Models.Room
+﻿@model MotelBooking.Models.Booking
 
 
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["Success"]
+
+
+
+
+<h2>Edit Booking</h2>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="BookingID" />
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-2">
+        <label>Customer Name</label>
+        <input asp-for="CustomerName" class="form-control" />
     </div>
-}
 
+    <div class="mb-2">
+        <label>Customer Phone</label>
+        <input asp-for="CustomerPhone" class="form-control" />
+    </div>
 
-<div class="container mt-4">
+    <!--  ROOM SECTION -->
+    <div class="mb-2">
+        <label>Room</label>
+        <select asp-for="RoomID" asp-items="ViewBag.Rooms" class="form-control">
+            <option value="">-- Select Room --</option>
+        </select>
+    </div>
 
-    <h2>Edit Room</h2>
+    <div class="mb-2">
+        <label>Check In</label>
+        <input asp-for="CheckIn" type="date" class="form-control" />
+    </div>
 
-    <form asp-action="Edit" method="post" class="card p-3">
+    <div class="mb-2">
+        <label>Check Out</label>
+        <input asp-for="CheckOut" type="date" class="form-control" />
+    </div>
 
-        <input type="hidden" asp-for="RoomID" />
+    <div class="mb-2">
+        <label>Booking Type</label>
+        <select asp-for="BookingType" class="form-control">
+            <option value="Hourly">Hourly</option>
+            <option value="Day">Day</option>
+            <option value="Night">Night</option>
+        </select>
+    </div>
 
-        <input asp-for="RoomNumber" class="form-control mb-2" />
-        <input asp-for="RoomType" class="form-control mb-2" />
+    <div class="mb-2">
+        <label>Total Amount</label>
+        <input asp-for="TotalAmount" class="form-control" />
+    </div>
 
-        <input asp-for="PricePerHourly" class="form-control mb-2" />
-        <input asp-for="PricePerNight" class="form-control mb-2" />
-        <input asp-for="PricePerDay" class="form-control mb-2" />
+    <div class="mb-2">
+        <label>Status</label>
+        <select asp-for="Status" class="form-control">
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Cancelled">Cancelled</option>
+        </select>
+    </div>
 
-        <input asp-for="ImageUrl" class="form-control mb-2" />
+    <button type="submit" class="btn btn-success btn-sm">
+        Update
+    </button>
 
-        <label>
-            <input asp-for="IsAvailable" /> Available
-        </label>
+    <a asp-action="Index" class="btn btn-secondary btn-sm">
+        Cancel
+    </a>
 
-        <button type="submit" class="btn btn-success mt-2">Update</button>
-
-    </form>
-
-</div>
+</form>

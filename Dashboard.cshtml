@@ -1,0 +1,68 @@
+﻿@model List<MotelBooking.Models.BookingRequest>
+
+@{
+    ViewData["Title"] = "Customer Dashboard";
+}
+<a asp-controller="Customer"
+   asp-action="Dashboard"
+   class="nav-btn mx-2">
+    Dashboard
+</a>
+<div class="container mt-4">
+
+    <h2 class="mb-4">My Booking Requests</h2>
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Room No</th>
+                <th>Room Type</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.RequestID</td>
+                        <td>@item.RoomNo</td>
+                        <td>@item.RoomType</td>
+                        <td>@item.CheckIn.ToShortDateString()</td>
+                        <td>@item.CheckOut.ToShortDateString()</td>
+                        <td>
+                            @if (item.Status == "Approved")
+                            {
+                                <span class="badge bg-success">Approved</span>
+                            }
+                            else if (item.Status == "Rejected")
+                            {
+                                <span class="badge bg-danger">Rejected</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-danger">
+                        No booking requests found
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</div>

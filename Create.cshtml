@@ -1,95 +1,106 @@
-﻿@model MotelBooking.Models.Room
-@using MotelBooking.Models
+﻿@model MotelBooking.Models.Booking
 
 @{
-    var roomList = ViewBag.Rooms as List<Room>;
+    ViewData["Title"] = "Create Booking";
 }
 
 
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["Success"]
-    </div>
 }
+
 
 <div class="container mt-4">
 
-    <h2>Add Room</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
 
-    <form asp-action="Create" method="post" class="card p-3 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-header bg-dark text-white text-center">
+                    <h5 class="mb-0">Create Booking</h5>
+                </div>
 
-        <input asp-for="RoomNumber" class="form-control mb-2" placeholder="Room Number" />
-        <input asp-for="RoomType" class="form-control mb-2" placeholder="Room Type" />
+                <div class="card-body">
 
-        <input asp-for="PricePerHourly" class="form-control mb-2" placeholder="Hourly Price" />
-        <input asp-for="PricePerNight" class="form-control mb-2" placeholder="Night Price" />
-        <input asp-for="PricePerDay" class="form-control mb-2" placeholder="Day Price" />
 
-        <input asp-for="ImageUrl" class="form-control mb-2" placeholder="Image URL" />
 
-        <label>
-            <input asp-for="IsAvailable" /> Available
-        </label>
 
-        <button type="submit" class="btn btn-success mt-2">Save</button>
-    </form>
 
-    <h3>Room List</h3>
 
-    <table class="table table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>No</th>
-                <th>Type</th>
-                <th>Hourly</th>
-                <th>Night</th>
-                <th>Day</th>
-                <th>Available</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
+                    <form asp-action="Create" method="post">
 
-        <tbody>
-            @if (roomList != null && roomList.Count > 0)
-            {
-                foreach (var item in roomList)
-                {
-                    <tr>
-                        <td>@item.RoomID</td>
-                        <td>@item.RoomNumber</td>
-                        <td>@item.RoomType</td>
-                        <td>@item.PricePerHourly</td>
-                        <td>@item.PricePerNight</td>
-                        <td>@item.PricePerDay</td>
-                        <td>@item.IsAvailable</td>
+                        <div asp-validation-summary="All" class="text-danger"></div>
 
-                        <td>
-                            <a asp-controller="Room"
-                               asp-action="Edit"
-                               asp-route-id="@item.RoomID"
-                               class="btn btn-primary btn-sm">
-                                Edit
-                            </a>
+                        <!-- Customer Name -->
+                        <div class="mb-3">
+                            <label>Customer Name</label>
+                            <input asp-for="CustomerName" class="form-control" />
+                            <span asp-validation-for="CustomerName" class="text-danger"></span>
+                        </div>
 
-                            <a asp-controller="Room"
-                               asp-action="Delete"
-                               asp-route-id="@item.RoomID"
-                               class="btn btn-danger btn-sm">
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
-                }
-            }
-            else
-            {
-                <tr>
-                    <td colspan="8" class="text-center">No rooms yet</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                        <!-- Customer Phone -->
+                        <div class="mb-3">
+                            <label>Customer Phone</label>
+                            <input asp-for="CustomerPhone" class="form-control" />
+                            <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+                        </div>
+
+                        <!-- Room Number (USER INPUT) -->
+                        <div class="mb-3">
+                            <label>Room Number</label>
+                            <input asp-for="RoomNumber" class="form-control" />
+                            <span asp-validation-for="RoomNumber" class="text-danger"></span>
+                        </div>
+
+                        <!-- Check In -->
+                        <div class="mb-3">
+                            <label>Check In</label>
+                            <input asp-for="CheckIn" type="date" class="form-control" />
+                            <span asp-validation-for="CheckIn" class="text-danger"></span>
+                        </div>
+
+                        <!-- Check Out -->
+                        <div class="mb-3">
+                            <label>Check Out</label>
+                            <input asp-for="CheckOut" type="date" class="form-control" />
+                            <span asp-validation-for="CheckOut" class="text-danger"></span>
+                        </div>
+
+                        <!-- Booking Type -->
+                        <div class="mb-3">
+                            <label>Booking Type</label>
+                            <select asp-for="BookingType" class="form-control">
+                                <option value="">-- Select Type --</option>
+                                <option value="Hourly">Hourly</option>
+                                <option value="Day">Day</option>
+                                <option value="Night">Night</option>
+                            </select>
+                            <span asp-validation-for="BookingType" class="text-danger"></span>
+                        </div>
+
+                        <!-- Total Amount -->
+                        <div class="mb-3">
+                            <label>Total Amount</label>
+                            <input asp-for="TotalAmount" class="form-control" />
+                            <span asp-validation-for="TotalAmount" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">
+                            Save Booking
+                        </button>
+
+                    </form>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 </div>
+
+<a asp-controller="Booking"
+   asp-action="Index"
+   class="btn btn-info btn-sm px-2 py-1">
+    View
+</a>
